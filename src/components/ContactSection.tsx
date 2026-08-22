@@ -1,7 +1,13 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, Phone, Send, Loader2, CheckCircle } from 'lucide-react';
+import { Mail, Phone, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
+import emailjs from '@emailjs/browser';
+
+// ── EmailJS Config ── Fill these in from https://www.emailjs.com/
+const EMAILJS_SERVICE_ID  = 'service_dpbiyoc';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz456'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'AbCdEfGhIjKlMnOp'
 
 const contacts = [
   {
@@ -39,7 +45,7 @@ export default function ContactSection() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
@@ -48,12 +54,27 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    await new Promise(r => setTimeout(r, 1800));
-    setStatus('sent');
-    setTimeout(() => {
-      setStatus('idle');
-      setForm({ name: '', email: '', message: '' });
-    }, 3000);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+          reply_to: form.email,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus('sent');
+      setTimeout(() => {
+        setStatus('idle');
+        setForm({ name: '', email: '', message: '' });
+      }, 4000);
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -207,6 +228,8 @@ export default function ContactSection() {
                   background:
                     status === 'sent'
                       ? 'linear-gradient(135deg, #22D3EE, #3B82F6)'
+                      : status === 'error'
+                      ? 'linear-gradient(135deg, #EF4444, #F97316)'
                       : 'linear-gradient(135deg, #8B5CF6, #22D3EE)',
                 }}
                 whileHover={{ scale: 1.02 }}
@@ -239,6 +262,12 @@ export default function ContactSection() {
                     <>
                       <CheckCircle size={15} />
                       Message Sent!
+                    </>
+                  )}
+                  {status === 'error' && (
+                    <>
+                      <AlertCircle size={15} />
+                      Failed — Try Again
                     </>
                   )}
                 </span>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Heart } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
 const socials = [
@@ -70,12 +70,8 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="flex flex-col sm:flex-row items-center gap-2 text-secondary text-xs">
+          <div className="flex items-center gap-2 text-secondary text-xs">
             <span>© 2026 Shridhar. All Rights Reserved.</span>
-            <span className="hidden sm:block text-white/10">·</span>
-            <span className="flex items-center gap-1">
-              Built with <Heart size={10} className="text-purple fill-purple mx-1" /> using React + Framer Motion
-            </span>
           </div>
         </div>
       </div>
