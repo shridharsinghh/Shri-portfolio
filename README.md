@@ -1,32 +1,49 @@
-# React + TypeScript + Vite
+# Shridhar Singh — Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, responsive developer portfolio built with React, TypeScript, Vite, and Tailwind CSS. It showcases my skills, education, experience, projects, and contact information in a clean and interactive interface.
 
-Currently, two official plugins are available:
+## 🚀 Live Portfolio
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Coming soon...
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Responsive design for desktop, tablet, and mobile
+- Interactive navigation
+- Animated background effects
+- Custom cursor interactions
+- Skills and technology showcase
+- Education and experience sections
+- Projects section
+- Contact section
+- Smooth and modern UI animations
 
-## Expanding the Oxlint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- JavaScript
+- HTML5
+- CSS3
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## 📂 Project Structure
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+```text
+src/
+├── assets/
+├── components/
+│   ├── AboutSection.tsx
+│   ├── ContactSection.tsx
+│   ├── EducationSection.tsx
+│   ├── ExperienceSection.tsx
+│   ├── HeroSection.tsx
+│   ├── Navigation.tsx
+│   ├── ProjectsSection.tsx
+│   ├── SkillsSection.tsx
+│   └── ...
+├── App.tsx
+├── App.css
+├── index.css
+└── main.tsx
