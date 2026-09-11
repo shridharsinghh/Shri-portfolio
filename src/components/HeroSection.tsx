@@ -142,7 +142,7 @@ export default function HeroSection() {
               </motion.a>
 
               <motion.a
-                href="https://drive.google.com/uc?export=download&id=1Z0tVpyarNt_YNU_S368AmPHezcDhSRze"
+                href="https://drive.google.com/uc?export=download&id=1IXD1vokI_EwUbyhRwKUwQV0G2VD-6Fq-"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-magnetic
