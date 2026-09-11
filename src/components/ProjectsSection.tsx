@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ExternalLink, ChevronRight } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import TiltCard from './TiltCard';
 import { GithubIcon } from './Icons';
 
@@ -39,7 +39,7 @@ const projects: Project[] = [
       'Swagger Documentation',
       'RESTful Architecture',
     ],
-    github: 'https://github.com/shridharsinghh/FitTrack-Pro',
+    github: 'https://github.com/shridharsinghh/Fitness-Tracker',
     live: '#',
     gradient: 'from-purple/20 via-transparent to-cyan/10',
     accent: '#8B5CF6',
@@ -47,26 +47,28 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    name: 'AI Browser Assistant',
-    tagline: 'Gemini-Powered AI Extension Backend',
+    name: 'Digital Banking System',
+    tagline: 'Event-Driven Microservices Banking Platform',
     description:
-      'A lightweight yet powerful AI browser assistant powered by Google Gemini API, with a Spring Boot backend and an interactive JavaScript frontend.',
+      'A production-grade 6-service microservices banking system with Kafka for event-driven communication, real-time fraud detection, and Razorpay payment integration.',
     longDesc:
-      'An intelligent browser extension that harnesses the power of Google Gemini API to provide real-time AI responses directly in your browser, backed by a robust Spring Boot service layer.',
-    tech: ['Java', 'Spring Boot', 'Gemini API', 'JavaScript', 'HTML', 'CSS'],
+      'A comprehensive banking platform built with the Saga pattern for distributed transaction consistency, Redis-powered fraud detection with OTP verification, and automated refund handling for failed or fraudulent transfers.',
+    tech: ['Java', 'Spring Boot', 'Kafka', 'Redis', 'MySQL', 'Razorpay'],
     features: [
-      'AI-powered browser assistant',
-      'Spring Boot backend',
-      'Gemini API integration',
-      'Real-time AI responses',
-      'Lightweight JavaScript UI',
-      'Contextual AI analysis',
+      '6-Service Microservices Architecture',
+      'Saga Pattern for Distributed Transactions',
+      'Real-Time Fraud Detection (Redis)',
+      'OTP-Based Transaction Verification',
+      'Razorpay Payment Integration',
+      'Webhook-Based Payment Status',
+      'Automated Refunds on Failed Transfers',
+      'API Gateway & Event-Driven Kafka',
     ],
     github: 'https://github.com/shridharsinghh',
     live: '#',
     gradient: 'from-cyan/20 via-transparent to-blue/10',
     accent: '#22D3EE',
-    mockupType: 'extension',
+    mockupType: 'browser',
   },
 ];
 
@@ -84,6 +86,9 @@ const techColors: Record<string, string> = {
   JavaScript: '#8B5CF6',
   HTML: '#3B82F6',
   CSS: '#22D3EE',
+  Kafka: '#F59E0B',
+  Redis: '#EF4444',
+  Razorpay: '#3B82F6',
 };
 
 function BrowserMockup({ accent }: { accent: string }) {
@@ -136,58 +141,57 @@ function BrowserMockup({ accent }: { accent: string }) {
   );
 }
 
-function ExtensionMockup({ accent }: { accent: string }) {
+function BankingMockup({ accent }: { accent: string }) {
   return (
     <div
-      className="glass-strong rounded-2xl overflow-hidden border border-white/10 max-w-xs mx-auto"
+      className="glass-strong rounded-2xl overflow-hidden border border-white/10"
       style={{ boxShadow: `0 20px 60px ${accent}20` }}
     >
-      {/* Extension header */}
-      <div
-        className="px-4 py-3 border-b border-white/[0.06]"
-        style={{ background: `linear-gradient(135deg, ${accent}15, transparent)` }}
-      >
-        <div className="flex items-center gap-2">
+      {/* Browser chrome */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.03]">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400/60" />
+          <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
+          <div className="w-3 h-3 rounded-full bg-green-400/60" />
+        </div>
+        <div className="flex-1 mx-4">
           <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-sm"
-            style={{ background: `${accent}20`, border: `1px solid ${accent}30` }}
+            className="h-6 rounded-md px-3 text-xs flex items-center text-secondary/60 glass"
+            style={{ fontSize: '10px' }}
           >
-            🤖
-          </div>
-          <div>
-            <p className="text-xs font-bold text-text">AI Assistant</p>
-            <p className="text-[10px] text-secondary/60">Powered by Gemini</p>
-          </div>
-          <div className="ml-auto">
-            <motion.div
-              className="w-2 h-2 rounded-full"
-              style={{ background: accent }}
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
+            api-gateway:8080/banking/transfer
           </div>
         </div>
       </div>
-      {/* Chat area */}
-      <div className="p-4 space-y-3 min-h-[140px]">
-        <div className="bg-white/5 rounded-xl rounded-tl-sm px-3 py-2 text-xs text-secondary max-w-[80%]">
-          Explain this code snippet to me
+      {/* Kafka event stream mockup */}
+      <div className="p-5 space-y-2.5 min-h-[160px]">
+        <div className="text-xs font-mono space-y-1.5">
+          <p className="text-yellow-400/70">▶ Kafka Event Stream</p>
+          <p className="ml-3 text-cyan/80">
+            <span className="text-green-300/80">[TRANSFER]</span> ₹50,000 → ACC-9821
+          </p>
+          <p className="ml-3 text-cyan/80">
+            <span className="text-red-400/80">[FRAUD]</span>{' '}
+            <span className="text-yellow-300/80">Velocity check triggered</span>
+          </p>
+          <p className="ml-3 text-cyan/80">
+            <span className="text-purple/80">[OTP]</span> Verification sent
+          </p>
+          <p className="ml-3 text-cyan/80">
+            <span className="text-green-300/80">[SAGA]</span> Transaction committed ✓
+          </p>
         </div>
-        <div
-          className="rounded-xl rounded-tr-sm px-3 py-2 text-xs text-text ml-auto max-w-[85%]"
-          style={{ background: `${accent}20`, border: `1px solid ${accent}20` }}
-        >
-          This is a Spring Boot REST controller that handles JWT authentication...
-        </div>
-        <div className="flex items-center gap-2 mt-3 glass rounded-xl px-3 py-2">
-          <span className="text-[10px] text-secondary/50 flex-1">Ask anything...</span>
-          <motion.div
-            className="w-5 h-5 rounded-full flex items-center justify-center"
-            style={{ background: `linear-gradient(135deg, ${accent}, #8B5CF6)` }}
-            whileHover={{ scale: 1.1 }}
-          >
-            <ChevronRight size={10} className="text-white" />
-          </motion.div>
+        {/* Status bar */}
+        <div className="pt-1 flex gap-2">
+          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-green-500/20 text-green-400 border border-green-500/20">
+            200 OK
+          </span>
+          <span className="px-2 py-0.5 rounded text-[10px] text-yellow-400/80 bg-yellow-500/10 border border-yellow-500/20">
+            Kafka ✓
+          </span>
+          <span className="px-2 py-0.5 rounded text-[10px] text-red-400/80 bg-red-500/10 border border-red-500/20">
+            Redis ✓
+          </span>
         </div>
       </div>
     </div>
@@ -243,10 +247,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           />
 
           <div className="relative z-10 w-full">
-            {project.mockupType === 'browser' ? (
+            {project.id === 1 ? (
               <BrowserMockup accent={project.accent} />
             ) : (
-              <ExtensionMockup accent={project.accent} />
+              <BankingMockup accent={project.accent} />
             )}
           </div>
         </div>
