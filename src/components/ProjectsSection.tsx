@@ -64,7 +64,7 @@ const projects: Project[] = [
       'Automated Refunds on Failed Transfers',
       'API Gateway & Event-Driven Kafka',
     ],
-    github: 'https://github.com/shridharsinghh',
+    github: 'https://github.com/shridharsinghh/Digital-Banking-System',
     live: '#',
     gradient: 'from-cyan/20 via-transparent to-blue/10',
     accent: '#22D3EE',
